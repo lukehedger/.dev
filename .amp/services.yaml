@@ -1,0 +1,5 @@
+services:
+  site:
+    command: bun run dev
+    health: /
+    portal: true

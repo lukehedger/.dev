@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+t0=$SECONDS
+step() { printf '\n[setup +%ss] %s\n' "$((SECONDS - t0))" "$1"; }
+
+# Bun is preinstalled in the Amp orb base image; install it only if missing.
+if ! command -v bun >/dev/null 2>&1; then
+	step "Installing Bun"
+	curl -fsSL https://bun.sh/install | bash
+	export PATH="$HOME/.bun/bin:$PATH"
+fi
+step "Using Bun $(bun --version)"
+
+step "Installing dependencies from bun.lock"
+bun install --frozen-lockfile
+
+step "Setup complete"
