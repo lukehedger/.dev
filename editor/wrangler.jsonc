@@ -1,0 +1,27 @@
+// The editor at w.lukehedger.dev. Cloudflare Access (one-time PIN for lh4@pm.me,
+// one-month session) protects the whole hostname; the Worker re-verifies the Access
+// token on every API call. Set the GitHub token with:
+//   bunx wrangler secret put GITHUB_TOKEN -c editor/wrangler.jsonc
+{
+	"$schema": "../node_modules/wrangler/config-schema.json",
+	"name": "lukehedger-editor",
+	"main": "worker.ts",
+	"compatibility_date": "2026-10-01",
+	"workers_dev": false,
+	"preview_urls": false,
+	"routes": [{ "pattern": "w.lukehedger.dev", "custom_domain": true }],
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+		"not_found_handling": "single-page-application",
+		"run_worker_first": ["/api/*"]
+	},
+	"vars": {
+		"GITHUB_REPO": "lukehedger/.dev",
+		"GITHUB_BRANCH": "main",
+		"ACCESS_TEAM_DOMAIN": "lukehedger.cloudflareaccess.com",
+		"ACCESS_AUD": "ab93978a2be0aba8a05a9653fc8984ed1818cdcafb17249db8b1851cc1a8f0fe",
+		"ALLOWED_EMAIL": "lh4@pm.me"
+	},
+	"observability": { "enabled": true }
+}

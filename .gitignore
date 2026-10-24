@@ -21,3 +21,9 @@ node_modules/
 
 # amp
 .amp/portals/
+
+# editor build output
+editor/dist/
+
+# wrangler
+.wrangler/

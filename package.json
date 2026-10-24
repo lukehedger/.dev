@@ -11,7 +11,11 @@
 		"build": "bun run src/build.ts",
 		"dev": "bun run src/dev.ts",
 		"check": "tsc --noEmit",
-		"test": "bun test"
+		"test": "bun test",
+		"deploy": "wrangler deploy",
+		"editor": "bun run editor/dev.ts",
+		"editor:build": "bun run editor/build.ts",
+		"editor:deploy": "wrangler deploy -c editor/wrangler.jsonc"
 	},
 	"devDependencies": {
 		"@types/bun": "latest",
@@ -19,6 +23,8 @@
 		"marked": "^15.0.0",
 		"reading-time": "^1.5.0",
 		"shiki": "^1.22.0",
-		"typescript": "^5.7.0"
+		"typescript": "^5.7.0",
+		"wrangler": "^4.152.0",
+		"yaml": "^2.9.1"
 	}
 }

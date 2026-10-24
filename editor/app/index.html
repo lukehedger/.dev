@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="theme-color" content="#0a0a0a" />
+		<title>Editor • lukehedger.dev</title>
+		<!-- Access protects the manifest too, so it must be fetched with credentials. -->
+		<link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="apple-touch-icon" href="/icon-192.png" />
+		<script>
+			document.documentElement.setAttribute(
+				"data-theme",
+				localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"),
+			);
+		</script>
+		<link rel="stylesheet" href="/app.css" />
+		<script type="module" src="/app.js"></script>
+	</head>
+	<body class="ed">
+		<header class="ed-bar">
+			<a class="ed-brand" href="/">lukehedger.dev <span aria-hidden="true">✎</span></a>
+			<span class="ed-status" id="status" role="status" aria-live="polite"></span>
+			<button class="ed-btn" id="signin" type="button" hidden>Sign in</button>
+			<button class="ed-btn" id="sync" type="button">Sync</button>
+			<button class="ed-btn ed-primary" id="new" type="button">New post</button>
+		</header>
+		<div class="ed-main" id="main" data-view="list">
+			<aside class="ed-list" aria-label="Posts">
+				<input class="ed-input" id="filter" type="search" placeholder="Filter posts" aria-label="Filter posts" />
+				<ul id="posts"></ul>
+			</aside>
+			<section class="ed-doc" id="doc" hidden aria-label="Editor">
+				<div class="ed-notice" id="notice" hidden></div>
+				<div class="ed-fields">
+					<label class="ed-field ed-wide">Title <input class="ed-input" id="f-title" autocomplete="off" /></label>
+					<label class="ed-field">Slug <input class="ed-input" id="f-slug" autocomplete="off" spellcheck="false" /></label>
+					<label class="ed-field">Publish date <input class="ed-input" id="f-date" type="date" /></label>
+					<label class="ed-field ed-wide">Description <input class="ed-input" id="f-desc" autocomplete="off" /></label>
+					<label class="ed-field ed-wide">Tags <input class="ed-input" id="f-tags" placeholder="ai, serverless" autocomplete="off" /></label>
+				</div>
+				<div class="ed-toolbar">
+					<button class="ed-btn ed-back" id="back" type="button">← Posts</button>
+					<label class="ed-btn">Add image<input id="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml" hidden /></label>
+					<button class="ed-btn" id="toggle-preview" type="button" aria-pressed="false">Preview</button>
+					<span class="ed-spacer"></span>
+					<button class="ed-btn" id="discard" type="button">Discard changes</button>
+					<button class="ed-btn ed-primary" id="publish" type="button">Publish</button>
+				</div>
+				<div class="ed-panes" id="panes" data-preview="false">
+					<textarea class="ed-body" id="f-body" spellcheck="true" aria-label="Post body (Markdown)"></textarea>
+					<article class="ed-preview prose" id="preview" aria-label="Preview"></article>
+				</div>
+			</section>
+			<section class="ed-empty" id="empty">
+				<p>Pick a post to edit, or start a new one. Drafts stay on this device until you publish.</p>
+			</section>
+		</div>
+	</body>
+</html>

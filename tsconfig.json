@@ -23,6 +23,6 @@
 			"~/*": ["src/*"]
 		}
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist", "src/styles"]
+	"include": ["src/**/*", "editor/**/*"],
+	"exclude": ["node_modules", "dist", "editor/dist", "src/styles"]
 }
