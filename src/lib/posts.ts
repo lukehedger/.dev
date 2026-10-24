@@ -1,6 +1,7 @@
 import matter from "gray-matter";
 import { readdir } from "node:fs/promises";
 import { basename, extname, join } from "node:path";
+import { getHighlight } from "./highlight.ts";
 import { type Heading, renderMarkdown } from "./markdown.ts";
 
 export type Frontmatter = {
@@ -10,6 +11,10 @@ export type Frontmatter = {
 	updatedDate?: Date;
 	tags: string[];
 	draft: boolean;
+	/** Where a rehosted post was first published, e.g. "Medium". Absent for posts written here. */
+	source?: string;
+	/** Live URL of the original, when the original site still exists. */
+	originalUrl?: string;
 };
 
 export type Post = {
@@ -19,6 +24,7 @@ export type Post = {
 	headings: Heading[];
 	readingMinutes: string;
 	plainText: string;
+	excerpt: string;
 };
 
 function normalizeTags(tags: unknown): string[] {
@@ -33,9 +39,13 @@ function parseFrontmatter(data: Record<string, unknown>, file: string): Frontmat
 	const publishDateRaw = data.publishDate;
 	const updatedDateRaw = data.updatedDate;
 
+	const source = typeof data.source === "string" && data.source ? data.source : undefined;
+	const originalUrl = typeof data.originalUrl === "string" && data.originalUrl ? data.originalUrl : undefined;
+
 	if (!title) throw new Error(`${file}: missing frontmatter.title`);
-	if (title.length > 60) throw new Error(`${file}: title exceeds 60 chars`);
-	if (description.length > 160) throw new Error(`${file}: description exceeds 160 chars`);
+	// Rehosted posts keep their original title and description; new posts stay within SEO limits.
+	if (!source && title.length > 60) throw new Error(`${file}: title exceeds 60 chars`);
+	if (!source && description.length > 160) throw new Error(`${file}: description exceeds 160 chars`);
 
 	const publishDate =
 		publishDateRaw instanceof Date
@@ -61,6 +71,8 @@ function parseFrontmatter(data: Record<string, unknown>, file: string): Frontmat
 		updatedDate: updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate : undefined,
 		tags: normalizeTags(data.tags),
 		draft: data.draft === true,
+		source,
+		originalUrl,
 	};
 }
 
@@ -69,6 +81,7 @@ export async function loadPosts(dir: string): Promise<Post[]> {
 	const files = entries
 		.filter((e) => e.isFile() && extname(e.name) === ".md")
 		.map((e) => join(dir, e.name));
+	const highlight = await getHighlight();
 	const posts: Post[] = [];
 	for (const file of files) {
 		const raw = await Bun.file(file).text();
@@ -76,10 +89,17 @@ export async function loadPosts(dir: string): Promise<Post[]> {
 		const fm = parseFrontmatter(parsed.data as Record<string, unknown>, file);
 		if (fm.draft && process.env.INCLUDE_DRAFTS !== "1") continue;
 		const slug = basename(file, ".md");
-		const { html, headings, readingMinutes, plainText } = await renderMarkdown(parsed.content);
-		posts.push({ slug, frontmatter: fm, html, headings, readingMinutes, plainText });
+		const { html, headings, readingMinutes, plainText, excerpt } = renderMarkdown(parsed.content, highlight);
+		if (!fm.description) fm.description = summarise(plainText);
+		posts.push({ slug, frontmatter: fm, html, headings, readingMinutes, plainText, excerpt });
 	}
 	return sortByDate(posts);
+}
+
+/** Up to ~155 characters of text, cut at a word boundary. */
+function summarise(text: string): string {
+	if (text.length <= 155) return text;
+	return `${text.slice(0, 155).replace(/\s+\S*$/, "")}…`;
 }
 
 export function sortByDate(posts: Post[]): Post[] {

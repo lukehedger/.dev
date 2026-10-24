@@ -1,0 +1,21 @@
+[
+	{ "type": "book", "title": "Ask Your Developer", "author": "Jeff Lawson" },
+	{ "type": "book", "title": "Close to the Machine", "author": "Ellen Ullman" },
+	{ "type": "book", "title": "Database Internals", "author": "Alex Petrov" },
+	{ "type": "book", "title": "Mastering Modular JavaScript", "author": "Nicolas Bevacqua" },
+	{ "type": "book", "title": "Practical Process Automation", "author": "Bernd Ruecker" },
+	{ "type": "book", "title": "The Soul of a New Machine", "author": "Tracy Kidder" },
+	{ "type": "paper", "title": "Autonomous Computing", "author": "Pat Helland" },
+	{ "type": "paper", "title": "Dynamo: Amazon's Highly Available Key-value Store", "author": "Amazon.com" },
+	{
+		"type": "paper",
+		"title": "Firecracker: Lightweight Virtualization for Serverless Applications",
+		"author": "Amazon Web Services"
+	},
+	{
+		"type": "paper",
+		"title": "Taming Consensus in the Wild (with the Shared Log Abstraction)",
+		"author": "Mahesh Balakrishnan"
+	},
+	{ "type": "paper", "title": "What Goes Around Comes Around... And Around...", "author": "Stonebraker & Pavlo" }
+]

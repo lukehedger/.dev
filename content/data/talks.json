@@ -1,0 +1,92 @@
+[
+	{
+		"title": "What are you waiting for?",
+		"event": "ServerlessDays Cardiff",
+		"date": "2024-10",
+		"href": "https://youtu.be/6ssC8590c70"
+	},
+	{
+		"title": "Serverless Development on AWS",
+		"event": "GOTO Book Club",
+		"date": "2024-09",
+		"href": "https://gotopia.tech/episodes/327/serverless-development-on-aws-building-enterprise-scale-serverless-solutions"
+	},
+	{
+		"title": "How to replace a critical API",
+		"event": "ServerlessDays Belfast",
+		"date": "2024-05",
+		"href": "https://www.youtube.com/watch?v=z1WN7AXim3g"
+	},
+	{
+		"title": "A Serverless User Journey",
+		"event": "Serverless London",
+		"date": "2023-05",
+		"href": "https://www.aleios.com/talks/a-serverless-user-journey-on-lego-com"
+	},
+	{
+		"title": "A Serverless User Journey",
+		"event": "Serverless Architecture Conf London",
+		"date": "2023-04",
+		"href": "https://serverless-architecture.io/serverless-architecture-design/serverless-user-journey/"
+	},
+	{
+		"title": "Cross-Domain Events with AsyncAPI and AWS",
+		"event": "AsyncAPI Conference",
+		"date": "2022-11",
+		"href": "https://www.youtube.com/watch?v=qjarcJQVLOg"
+	},
+	{
+		"title": "Pioneering Serverless Payments",
+		"event": "Serverless Architecture Conf Berlin",
+		"date": "2022-10",
+		"href": "https://slides.com/lh4/pioneering-serverless"
+	},
+	{
+		"title": "How To Write Node.js Lambda Functions",
+		"event": "Serverless Days Student Edition",
+		"date": "2022-08",
+		"href": "https://www.youtube.com/live/ktTPSC4uEqw?si=zYiSXFMnHZlmqsW2&t=11316"
+	},
+	{
+		"title": "Serverless: Ship on Day 1",
+		"event": "Serverless Days Student Edition",
+		"date": "2022-08",
+		"href": "https://www.youtube.com/live/h1v2xfaEWc8?si=Dw5PbAyxil9uw-u2&t=13731"
+	},
+	{
+		"title": "Pioneering Serverless Payments",
+		"event": "Brick by Brick",
+		"date": "2022-08",
+		"href": "https://slides.com/lh4/serverless-payments"
+	},
+	{
+		"title": "Continuous Serverless Delivery",
+		"event": "SST 1.0 Conf",
+		"date": "2022-05",
+		"href": "https://www.youtube.com/watch?v=6FzLjpMYcu8&t=8052s"
+	},
+	{
+		"title": "Sensitive Data Detection Pipelines",
+		"event": "AWS Summit London",
+		"date": "2022-04",
+		"href": "https://slides.com/lh4/sensitive-data-detection-pipelines-06fc75"
+	},
+	{
+		"title": "Serverless at Cancer Research UK",
+		"event": "Serverless London",
+		"date": "2020-05",
+		"href": "https://www.youtube.com/watch?v=s0nX_MDSDag&t=742s"
+	},
+	{
+		"title": "Web3: Ethereum and the next evolution of the Web",
+		"event": "WEBdeLDN, London",
+		"date": "2018",
+		"href": "https://github.com/lukehedger/talks/blob/master/0518-web3-webdeldn.pdf"
+	},
+	{
+		"title": "Modelling identity in the KORD Network",
+		"event": "EthCC, Paris",
+		"date": "2018",
+		"href": "https://youtu.be/-G9hLnq6ZCs?t=2670"
+	}
+]

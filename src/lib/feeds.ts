@@ -10,8 +10,11 @@ function xmlEscape(s: string): string {
 		.replace(/'/g, "&apos;");
 }
 
+const RSS_ITEMS = 20;
+
 export function renderRss(posts: Post[]): string {
 	const items = posts
+		.slice(0, RSS_ITEMS)
 		.map((p) => {
 			const pubDate = (p.frontmatter.updatedDate ?? p.frontmatter.publishDate).toUTCString();
 			const link = `${site.url}/posts/${p.slug}/`;

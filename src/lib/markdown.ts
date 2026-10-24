@@ -1,6 +1,5 @@
 import { Marked, type Tokens } from "marked";
 import readingTime from "reading-time";
-import { createHighlighter, type Highlighter } from "shiki";
 import { site } from "~/config.ts";
 
 export type Heading = { depth: number; slug: string; text: string };
@@ -10,46 +9,15 @@ export type Rendered = {
 	headings: Heading[];
 	readingMinutes: string;
 	plainText: string;
+	/** First paragraph of the rendered HTML, for post snippets. */
+	excerpt: string;
 };
 
-const SHIKI_LANGS = [
-	"typescript",
-	"ts",
-	"javascript",
-	"js",
-	"tsx",
-	"jsx",
-	"bash",
-	"shell",
-	"sh",
-	"json",
-	"markdown",
-	"md",
-	"html",
-	"css",
-	"python",
-	"py",
-	"yaml",
-	"yml",
-	"toml",
-	"go",
-	"rust",
-	"rs",
-	"diff",
-	"sql",
-] as const;
+/** Returns highlighted HTML for a code block. */
+export type Highlight = (code: string, lang: string) => string;
 
-let highlighterPromise: Promise<Highlighter> | null = null;
-
-export function getHighlighter(): Promise<Highlighter> {
-	if (!highlighterPromise) {
-		highlighterPromise = createHighlighter({
-			themes: ["dracula", "github-light"],
-			langs: [...SHIKI_LANGS],
-		});
-	}
-	return highlighterPromise;
-}
+const plainHighlight: Highlight = (code) =>
+	`<pre><code>${code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
 
 export function slugify(s: string): string {
 	return s
@@ -84,8 +52,7 @@ function ensureUniqueSlug(base: string, used: Map<string, number>): string {
 	return count === 0 ? base : `${base}-${count}`;
 }
 
-export async function renderMarkdown(md: string): Promise<Rendered> {
-	const highlighter = await getHighlighter();
+export function renderMarkdown(md: string, highlight: Highlight = plainHighlight): Rendered {
 	const headings: Heading[] = [];
 	const usedSlugs = new Map<string, number>();
 
@@ -100,13 +67,7 @@ export async function renderMarkdown(md: string): Promise<Rendered> {
 				return `<h${depth} id="${slug}"><a class="heading-anchor" href="#${slug}">${inner}</a></h${depth}>\n`;
 			},
 			code({ text, lang }: Tokens.Code): string {
-				const raw = lang ?? "text";
-				const resolved = (SHIKI_LANGS as readonly string[]).includes(raw) ? raw : "text";
-				return highlighter.codeToHtml(text, {
-					lang: resolved,
-					themes: { light: "github-light", dark: "dracula" },
-					defaultColor: false,
-				});
+				return highlight(text, lang ?? "text");
 			},
 			link({ href, title, tokens }: Tokens.Link): string {
 				const inner = this.parser.parseInline(tokens);
@@ -123,11 +84,12 @@ export async function renderMarkdown(md: string): Promise<Rendered> {
 		},
 	});
 
-	const html = (await m.parse(md)) as string;
+	const html = m.parse(md, { async: false });
 	const { text: readingMinutes } = readingTime(md);
 	const plainText = toPlainText(md);
+	const excerpt = html.match(/<p>[\s\S]*?<\/p>/)?.[0] ?? "";
 
-	return { html, headings, readingMinutes, plainText };
+	return { html, headings, readingMinutes, plainText, excerpt };
 }
 
 function toPlainText(md: string): string {

@@ -1,6 +1,7 @@
 import { cp, readdir, rm } from "node:fs/promises";
 import { join, relative } from "node:path";
 import { POSTS_PER_PAGE } from "./config.ts";
+import { loadData, type SiteData } from "./lib/data.ts";
 import { renderRss, renderSitemap } from "./lib/feeds.ts";
 import { render } from "./lib/html.ts";
 import { paginate } from "./lib/paginate.ts";
@@ -13,18 +14,21 @@ import {
 	uniqueTags,
 } from "./lib/posts.ts";
 import { writeFile } from "./lib/writeFile.ts";
+import { catalogueEntries, catalogueViews, renderBackCatalogue } from "./templates/backCatalogue.ts";
 import { renderBook } from "./templates/book.ts";
 import { renderHome } from "./templates/home.ts";
+import { renderLibrary } from "./templates/library.ts";
+import { renderListPage } from "./templates/listPage.ts";
 import { renderNotFound } from "./templates/notFound.ts";
 import { renderPost } from "./templates/post.ts";
 import { renderPostsIndex } from "./templates/postsIndex.ts";
-import { renderReading } from "./templates/reading.ts";
 import { renderTagPage } from "./templates/tagPage.ts";
 import { renderTagsIndex } from "./templates/tagsIndex.ts";
 
 const DIST = "dist";
 const PUBLIC_DIR = "public";
 const CONTENT_DIR = "content/posts";
+const DATA_DIR = "content/data";
 const STYLES_DIR = "src/styles";
 const CLIENT_ENTRY = "src/client/main.ts";
 
@@ -65,12 +69,39 @@ function pathForRoute(route: string): string {
 	return `${route.slice(1).replace(/\/$/, "")}/index.html`;
 }
 
-async function writePages(posts: Post[]): Promise<string[]> {
+async function writePages(posts: Post[], data: SiteData): Promise<string[]> {
 	const writes: PageWrite[] = [];
 
 	writes.push({ route: "/", html: render(renderHome(posts)) });
 	writes.push({ route: "/book/", html: render(renderBook()) });
-	writes.push({ route: "/reading/", html: render(renderReading()) });
+	writes.push({ route: "/library/", html: render(renderLibrary(data.library)) });
+	writes.push({
+		route: "/side-quests/",
+		html: render(
+			renderListPage({
+				title: "Side Quests",
+				description: "Things I build for fun",
+				path: "/side-quests/",
+				sections: [{ items: data.sideQuests }],
+			}),
+		),
+	});
+	writes.push({
+		route: "/open-source/",
+		html: render(
+			renderListPage({
+				title: "Open Source",
+				description: "Projects and experiments on GitHub",
+				path: "/open-source/",
+				sections: [{ items: data.openSource }],
+			}),
+		),
+	});
+	const entries = catalogueEntries(posts, data);
+	const views = catalogueViews(data);
+	for (const view of views) {
+		writes.push({ route: view.path, html: render(renderBackCatalogue(view, views, entries)) });
+	}
 	writes.push({ route: "/404.html", html: render(renderNotFound()) });
 
 	const sorted = sortByDate(posts);
@@ -142,6 +173,7 @@ export async function build(): Promise<void> {
 	console.log("build: copied public/");
 
 	const posts = await loadPosts(CONTENT_DIR);
+	const data = await loadData(DATA_DIR);
 	console.log(`build: loaded ${posts.length} posts`);
 
 	await buildClient();
@@ -150,7 +182,7 @@ export async function build(): Promise<void> {
 	await buildStyles();
 	console.log("build: wrote CSS");
 
-	const routes = await writePages(posts);
+	const routes = await writePages(posts, data);
 	console.log(`build: wrote ${routes.length} pages`);
 
 	await writeFeeds(posts, routes);

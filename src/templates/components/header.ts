@@ -47,7 +47,9 @@ export function renderHeader(currentPath: string): Html {
 						(link) => html`
 							<a
 								${attrs({
-									"aria-current": currentPath === link.path ? "page" : false,
+									"aria-current": (link.path === "/" ? currentPath === "/" : currentPath.startsWith(link.path))
+										? "page"
+										: false,
 									class: "main-menu-link",
 									href: link.path,
 								})}

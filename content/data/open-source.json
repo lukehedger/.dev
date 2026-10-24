@@ -1,0 +1,60 @@
+[
+	{ "title": "ao", "href": "https://github.com/lukehedger/ao", "desc": "Agent orchestrator" },
+	{ "title": "ao-jj", "href": "https://github.com/lukehedger/ao-jj", "desc": "Agent orchestrator with Jujutsu VCS" },
+	{
+		"title": "ao-chat",
+		"href": "https://github.com/lukehedger/ao-chat",
+		"desc": "Agent orchestrator with inter-agent chat via iroh-gossip mesh"
+	},
+	{ "title": "giants", "href": "https://github.com/lukehedger/giants", "desc": "Serverless development framework" },
+	{ "title": "meeseeks", "href": "https://github.com/lukehedger/meeseeks", "desc": "Personal software factory" },
+	{ "title": "metrix", "href": "https://github.com/lukehedger/metrix", "desc": "TUI dashboard for Claude Code usage metrics" },
+	{ "title": "sbox", "href": "https://github.com/lukehedger/sbox", "desc": "Wrapper around Docker Sandboxes" },
+	{
+		"title": "decider",
+		"href": "https://github.com/lukehedger/decider",
+		"desc": "Functional event sourcing decider pattern in TypeScript"
+	},
+	{ "title": "lsm-ts", "href": "https://github.com/lukehedger/lsm-ts", "desc": "Toy LSM tree-based database in TypeScript" },
+	{
+		"title": "Lambda Strategy Pattern",
+		"href": "https://github.com/lukehedger/lambda-strategy-pattern",
+		"desc": "Implementation of the Strategy Pattern on AWS Lambda"
+	},
+	{
+		"title": "Bun Powertools Event Handler",
+		"href": "https://github.com/lukehedger/bun-powertools-event-handler",
+		"desc": "Monolithic HTTP proxy Lambda function"
+	},
+	{
+		"title": "Bun Lambda",
+		"href": "https://github.com/lukehedger/bun-lambda",
+		"desc": "Template for Lambda functions with Bun and CDK"
+	},
+	{
+		"title": "Bloblang Lambda",
+		"href": "https://github.com/lukehedger/bloblang-lambda",
+		"desc": "Run Bloblang mappings in AWS Lambda"
+	},
+	{
+		"title": "Custom Intrinsics",
+		"href": "https://github.com/lukehedger/custom-intrinsics",
+		"desc": "Custom Step Functions intrinsic functions powered by LLRT"
+	},
+	{
+		"title": "Fluent Lambda Functions",
+		"href": "https://github.com/lukehedger/fluent-lambda",
+		"desc": "Write Lambda functions as a fluent interface"
+	},
+	{
+		"title": "Wide Telemetry",
+		"href": "https://github.com/lukehedger/wide-telemetry",
+		"desc": "Wide logging and wide tracing for AWS Lambda and Step Functions"
+	},
+	{
+		"title": "eth-graphql",
+		"href": "https://github.com/lukehedger/eth-graphql",
+		"desc": "The original Ethereum GraphQL API, wrapping Ethereum's JSON-RPC API"
+	},
+	{ "title": "sulk", "href": "https://github.com/lukehedger/sulk", "desc": "Solidity compilation without the tears" }
+]

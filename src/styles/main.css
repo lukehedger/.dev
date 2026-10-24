@@ -563,7 +563,7 @@ main {
 /* Hero accent rule (under h1.title on home, book, reading, and post pages) */
 #hello > .title::after,
 .book-page > .title::after,
-.reading-page > .title::after,
+.list-page > .title::after,
 .post-article > #blog-hero > .title::after {
 	content: "";
 	display: block;
@@ -722,7 +722,180 @@ main > p + .post-list {
 	content: none;
 }
 
-/* -- link list (experiments, talks) -------------------------------------- */
+/* -- latest post (home) -------------------------------------------------- */
+.latest-post {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.latest-post-title {
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.latest-post-title a {
+	color: hsl(var(--theme-text));
+	text-decoration: none;
+}
+
+.latest-post-title a:hover {
+	color: hsl(var(--theme-link));
+}
+
+.latest-post-excerpt {
+	margin-top: 0.25rem;
+}
+
+.read-more {
+	align-self: flex-start;
+	font-weight: 600;
+	font-size: 0.9375rem;
+}
+
+/* -- list pages (library, side quests, open source, back catalogue) ------ */
+.list-page-intro {
+	margin: 1rem 0 0;
+	color: hsl(var(--theme-muted));
+}
+
+.list-page > .section:first-of-type {
+	margin-top: 2.5rem;
+}
+
+.library-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.library-title {
+	font-weight: 600;
+}
+
+.library-author {
+	color: hsl(var(--theme-muted));
+	font-size: 0.9375rem;
+}
+
+.library-author::before {
+	content: " — ";
+}
+
+.library-note {
+	margin: 0.25rem 0 0;
+	font-size: 0.9375rem;
+}
+
+.catalogue-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 1.5rem;
+}
+
+.catalogue-filters .tag-pill {
+	background: transparent;
+	color: hsl(var(--theme-text));
+	border: 1px solid hsl(var(--theme-rule));
+	padding: 0.25rem 0.75rem;
+}
+
+.catalogue-filters .tag-pill:hover {
+	border-color: hsl(var(--theme-link));
+	color: hsl(var(--theme-link));
+	background: transparent;
+}
+
+.catalogue-filters .tag-pill[aria-current="page"] {
+	background: hsl(var(--theme-quote));
+	border-color: hsl(var(--theme-quote));
+	color: hsl(var(--theme-bg));
+}
+
+.list-page > .catalogue-year:first-of-type {
+	margin-top: 2.5rem;
+}
+
+.catalogue-year {
+	margin-top: 2.5rem;
+}
+
+.catalogue-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.875rem;
+}
+
+.catalogue-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.125rem;
+}
+
+@media (min-width: 640px) {
+	.catalogue-item {
+		flex-direction: row;
+		column-gap: 1rem;
+		align-items: baseline;
+	}
+}
+
+.catalogue-date {
+	min-width: 6.5rem;
+	flex-shrink: 0;
+	font-size: 0.8125rem;
+	color: hsl(var(--theme-muted));
+	font-variant-numeric: tabular-nums;
+}
+
+.catalogue-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.125rem;
+}
+
+.catalogue-title {
+	font-weight: 600;
+}
+
+.catalogue-title a {
+	color: hsl(var(--theme-text));
+	text-decoration: none;
+}
+
+.catalogue-title a:hover {
+	color: hsl(var(--theme-link));
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+}
+
+.catalogue-meta {
+	font-size: 0.875rem;
+	color: hsl(var(--theme-muted));
+}
+
+.catalogue-meta:empty {
+	display: none;
+}
+
+.catalogue-kind {
+	display: inline-block;
+	margin-inline-end: 0.5rem;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: hsl(var(--theme-link));
+}
+
+.catalogue-footer {
+	margin-top: 2.5rem;
+}
+
+/* -- link list (open source, side quests, explore) ----------------------- */
 .link-list {
 	display: flex;
 	flex-direction: column;
@@ -779,6 +952,17 @@ main > p + .post-list {
 	.post-article {
 		flex: 1 1 auto;
 	}
+}
+
+.post-source {
+	font-style: italic;
+}
+
+.prose mark {
+	background: hsl(var(--theme-quote) / 0.2);
+	color: inherit;
+	padding: 0 0.125rem;
+	border-radius: 2px;
 }
 
 .post-description {
@@ -1057,9 +1241,8 @@ main > p + .post-list {
 	color: hsl(var(--theme-link));
 }
 
-/* -- book + reading ------------------------------------------------------ */
-.book-page,
-.reading-page {
+/* -- book ---------------------------------------------------------------- */
+.book-page {
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;
