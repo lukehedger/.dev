@@ -744,7 +744,7 @@ main > p + .post-list {
 	color: hsl(var(--theme-link));
 }
 
-.latest-post-excerpt {
+.latest-post .latest-post-excerpt {
 	margin-top: 0.25rem;
 }
 
