@@ -1,8 +1,15 @@
+// lukehedger.dev: static assets on Workers, deployed by Workers Builds on push to main.
+// No workers.dev or preview URLs: the custom domain is the only public address.
 {
-  "name": "lukehedger.dev",
-  "compatibility_date": "2025-05-07",
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "404-page"
-  }
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "lukehedger-dev",
+	"compatibility_date": "2026-10-01",
+	"workers_dev": false,
+	"preview_urls": false,
+	"routes": [{ "pattern": "next.lukehedger.dev", "custom_domain": true }],
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page",
+		"html_handling": "auto-trailing-slash"
+	}
 }
