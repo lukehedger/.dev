@@ -42,7 +42,7 @@ export function renderHome(posts: Post[]): Html {
 			: null}
 
 		<section aria-label="Explore" class="section" id="explore">
-			<h2 class="section-title">Explore</h2>
+			<h2 class="section-title">my stuff</h2>
 			${renderLinkList(SECTIONS, { external: false })}
 		</section>
 	`;
