@@ -32,7 +32,6 @@ export function catalogueEntries(posts: Post[], data: SiteData): Entry[] {
 			external: false,
 			date: p.frontmatter.publishDate,
 			precision: "day" as const,
-			meta: p.frontmatter.source ? `Originally on ${p.frontmatter.source}` : undefined,
 		})),
 		{ kind: "writing", title: BOOK.title, href: "/book/", external: false, ...parsePartialDate(BOOK.date), meta: BOOK.meta },
 		...data.talks.map((t) => ({

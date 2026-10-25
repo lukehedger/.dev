@@ -28,7 +28,7 @@ const MONTH_LONG: Intl.DateTimeFormatOptions = {
 };
 
 export function renderHero(post: Post): Html {
-	const { title, publishDate, updatedDate, tags, draft, source, originalUrl } = post.frontmatter;
+	const { title, publishDate, updatedDate, tags, draft } = post.frontmatter;
 	return html`
 		${draft ? html`<span class="draft-tag">(Draft)</span>` : null}
 		<h1 class="title">${title}</h1>
@@ -38,14 +38,6 @@ export function renderHero(post: Post): Html {
 			</p>
 			${updatedDate
 				? html`<span class="post-updated">Last Updated: ${dateTag(updatedDate, MONTH_LONG)}</span>`
-				: null}
-			${source
-				? html`<span class="post-source"
-						>Originally published on
-						${originalUrl
-							? html`<a class="cactus-link" href="${originalUrl}" rel="noopener noreferrer" target="_blank">${source}</a>`
-							: source}</span
-					>`
 				: null}
 		</div>
 		${tags.length > 0
