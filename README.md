@@ -41,19 +41,3 @@ Both sites are Cloudflare Workers with static assets, deployed by Workers Builds
 - `editor/wrangler.jsonc`: **lukehedger-editor** serves the editor on `w.lukehedger.dev`.
 
 Neither has a `workers.dev` or preview URL; the custom domains are the only public addresses.
-
-## Editor
-
-`w.lukehedger.dev` is an installable PWA for writing new posts and editing existing ones.
-
-- **Offline first.** Posts and drafts live in the browser (IndexedDB). New posts stay on the device
-  until you publish. Publishing while offline queues the post and sends it when you're back online.
-- **Publishing** commits the Markdown file (and any added images, under `public/images/uploads/`)
-  straight to `main`, which triggers a deploy. If the post changed in the repo since you loaded it,
-  the editor flags a conflict instead of overwriting it silently.
-- **Access.** Cloudflare Access protects the whole hostname: one-time PIN emailed to lh4@pm.me,
-  one-month session. The Worker also verifies the Access token on every API call.
-- **GitHub token.** The Worker commits with a fine-grained personal access token stored as the
-  `GITHUB_TOKEN` secret: repository access to `lukehedger/.dev` only, permission
-  _Contents: Read and write_. Rotate it with
-  `bunx wrangler secret put GITHUB_TOKEN -c editor/wrangler.jsonc` or in the Cloudflare dashboard.
