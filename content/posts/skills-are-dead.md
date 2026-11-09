@@ -1,10 +1,10 @@
 ---
-title: skills are dead
+title: Skills Are Dead
 description: code the harness instead
-publishDate: '2026-08-28'
+publishDate: 2026-08-28
 tags: []
 source: pckt
-originalUrl: 'https://lsh.pckt.blog/skills-are-dead-qbxy9a9'
+originalUrl: https://lsh.pckt.blog/skills-are-dead-qbxy9a9
 ---
 
 Skills are a poor proxy for directing an agent to follow your codebase conventions, use a CLI or perform a deterministic workflow.
