@@ -6,7 +6,7 @@ description: >-
   is. Should we ignore it or embrace it? Probably a bit of both
 publishDate: '2015-09-08'
 tags:
-  - javascript
+  - software-development
 source: level-out.com
 ---
 

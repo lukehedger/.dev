@@ -3,11 +3,7 @@ title: Crossing Over to Web3–03 Decentralised Applications
 description: "Issue #3 of the definitive developer’s guide for the journey from web2 to\_web3"
 publishDate: '2018-03-27'
 tags:
-  - dapps
-  - ethereum
-  - web3
-  - development
-  - blockchain
+  - decentralisation
 source: JAAK
 originalUrl: >-
   https://medium.com/jaak-io/crossing-over-to-web3-03-decentralised-applications-20d56f4819d7

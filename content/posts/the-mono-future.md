@@ -4,7 +4,6 @@ description: ''
 publishDate: '2019-08-16'
 tags:
   - software-development
-  - javascript
 source: Medium
 originalUrl: 'https://medium.com/@level_out/the-mono-future-1dacd4d495cd'
 ---

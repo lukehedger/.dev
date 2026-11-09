@@ -2,7 +2,7 @@
 title: I am not pro AI
 description: I’m pro getting shit done
 publishDate: '2026-08-28'
-tags: []
+tags: ["ai"]
 source: pckt
 originalUrl: 'https://lsh.pckt.blog/i-am-not-pro-ai-406ba1t'
 ---

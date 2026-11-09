@@ -5,7 +5,7 @@ description: >-
   the arrival of my new website.
 publishDate: '2014-08-20'
 tags:
-  - blog
+  - personal
 source: level-out.com
 ---
 

@@ -5,7 +5,7 @@ description: >-
   Jeet is, in fact, a super-intelligent CSS grid system.
 publishDate: '2015-02-04'
 tags:
-  - css
+  - software-development
 source: level-out.com
 ---
 

@@ -2,7 +2,7 @@
 title: Skills Are Dead
 description: code the harness instead
 publishDate: 2026-08-28
-tags: []
+tags: ["ai"]
 source: pckt
 originalUrl: https://lsh.pckt.blog/skills-are-dead-qbxy9a9
 ---

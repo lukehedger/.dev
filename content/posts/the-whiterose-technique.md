@@ -3,9 +3,7 @@ title: The Whiterose Technique
 description: "Time management tips from Mr\_Robot"
 publishDate: '2017-02-17'
 tags:
-  - tech
-  - productivity
-  - mr-robot
+  - personal
 source: Medium
 originalUrl: 'https://medium.com/@level_out/the-whiterose-technique-51fef7bcae4d'
 ---

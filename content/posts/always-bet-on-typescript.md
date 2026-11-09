@@ -3,7 +3,6 @@ title: always bet on typescript
 description: the trend in agentic AI tooling
 publishDate: '2026-07-27'
 tags:
-  - typescript
   - ai
 source: pckt
 originalUrl: 'https://lsh.pckt.blog/always-bet-on-typescript-vmk3y0t'

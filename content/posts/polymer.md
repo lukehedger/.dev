@@ -3,9 +3,7 @@ title: Polymer
 description: Welcome to the future
 publishDate: '2014-09-11'
 tags:
-  - polymer
-  - web-components
-  - hello-world
+  - software-development
 source: level-out.com
 ---
 

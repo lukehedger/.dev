@@ -3,11 +3,7 @@ title: Everything is a Component
 description: ''
 publishDate: '2018-08-29'
 tags:
-  - the-pit-of-conditionals
-  - application-architecture
-  - components
-  - react
-  - javascript
+  - software-development
 source: Medium
 originalUrl: 'https://medium.com/@level_out/everything-is-a-component-cf9f469ad981'
 ---

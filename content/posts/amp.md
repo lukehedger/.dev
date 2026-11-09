@@ -4,7 +4,6 @@ description: building websites from my phone
 publishDate: '2026-07-29'
 tags:
   - ai
-  - amp
 source: pckt
 originalUrl: 'https://lsh.pckt.blog/amp-z1trdj6'
 ---

@@ -3,11 +3,7 @@ title: Crossing Over to Web3 – 01 An Introduction to Decentralised Development
 description: "Issue #1 in the definitive developer’s guide for the journey from web2 to\_web3"
 publishDate: '2017-10-12'
 tags:
-  - developer
-  - web3
-  - blockchain
-  - ethereum
-  - dapps
+  - decentralisation
 source: JAAK
 originalUrl: >-
   https://medium.com/jaak-io/crossing-over-to-web3-an-introduction-to-decentralised-development-53de470da331

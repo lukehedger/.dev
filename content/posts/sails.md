@@ -5,8 +5,7 @@ description: >-
   databases using a uniform API.
 publishDate: '2014-08-28'
 tags:
-  - sails
-  - node
+  - software-development
 source: level-out.com
 ---
 

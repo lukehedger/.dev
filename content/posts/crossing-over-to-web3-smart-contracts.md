@@ -3,11 +3,7 @@ title: Crossing Over to Web3 – 02 Smart Contracts
 description: "Issue #2 of the definitive developer’s guide for the journey from web2 to\_web3"
 publishDate: '2017-11-27'
 tags:
-  - web3
-  - dapps
-  - blockchain
-  - ethereum
-  - development
+  - decentralisation
 source: JAAK
 originalUrl: 'https://medium.com/jaak-io/crossing-over-to-web3-smart-contracts-3a295e35e5c0'
 ---

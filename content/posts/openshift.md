@@ -5,8 +5,7 @@ description: >-
   doesn't rip you off - who can you turn to?
 publishDate: '2015-06-01'
 tags:
-  - node
-  - hosting
+  - software-development
 source: level-out.com
 ---
 

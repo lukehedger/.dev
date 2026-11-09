@@ -19,7 +19,7 @@ type Entry = {
 
 export type CatalogueView = { key: "all" | "writing" | "talks" | "conferences"; label: string; path: string };
 
-const KIND_LABEL: Record<CatalogueKind, string> = { writing: "Writing", talk: "Talk", conference: "Conference" };
+const KIND_LABEL: Record<CatalogueKind, string> = { writing: "Post", talk: "Talk", conference: "Conference" };
 
 const BOOK = { title: "Serverless Development on AWS", date: "2024", meta: "Book, O'Reilly" };
 
@@ -95,7 +95,7 @@ export function renderBackCatalogue(view: CatalogueView, views: CatalogueView[],
 	const kind = VIEW_KIND[view.key];
 	const entries = kind ? all.filter((e) => e.kind === kind) : all;
 	const years = [...new Set(entries.map((e) => e.date.getUTCFullYear()))];
-	const description = "Everything I've written and the talks I've given, newest first";
+	const description = "My posts and talks over the years";
 
 	const content = html`
 		<div class="list-page catalogue-page">

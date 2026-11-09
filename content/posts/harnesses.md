@@ -2,7 +2,7 @@
 title: harnesses
 description: don’t put all your yegges in one basket
 publishDate: '2026-08-15'
-tags: []
+tags: ["ai"]
 source: pckt
 originalUrl: 'https://lsh.pckt.blog/harnesses-ga3655y'
 ---

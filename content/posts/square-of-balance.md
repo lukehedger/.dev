@@ -2,7 +2,7 @@
 title: "Square of Balance"
 description: "Balancing delivery speed and application stability for maximum reliability"
 publishDate: "29 April 2026"
-tags: ["delivery", "observability", "testing", "serverless", "reliability", "quality"]
+tags: ["serverless"]
 ---
 
 The **Square of Balance** is a framework for shipping reliable software at scale. It balances delivery speed against application stability by spreading engineering effort across four activities: **deliver, test, observe and recover**.

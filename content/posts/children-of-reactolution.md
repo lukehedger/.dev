@@ -5,8 +5,7 @@ description: >-
   Forever
 publishDate: '2015-11-25'
 tags:
-  - javascript
-  - react
+  - software-development
 source: level-out.com
 ---
 

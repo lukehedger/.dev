@@ -3,7 +3,7 @@ title: is atproto blockchain without the coins?
 description: “web3 but good”?
 publishDate: '2026-07-27'
 tags:
-  - atproto
+  - decentralisation
 source: pckt
 originalUrl: 'https://lsh.pckt.blog/is-atproto-blockchain-without-the-coins-5aknv73'
 ---

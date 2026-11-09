@@ -5,7 +5,7 @@ description: >-
   reincarnated. Yay.
 publishDate: '2015-08-20'
 tags:
-  - blog
+  - personal
 source: level-out.com
 ---
 

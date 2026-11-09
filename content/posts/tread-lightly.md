@@ -3,9 +3,6 @@ title: Tread Lightly
 description: "An approach to building\_websites"
 publishDate: '2017-02-25'
 tags:
-  - web-development
-  - programming
-  - application-architecture
   - software-development
 source: Medium
 originalUrl: 'https://medium.com/@level_out/tread-lightly-392541f34c92'
