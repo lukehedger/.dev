@@ -29,7 +29,3 @@ Some of the same people were there as now. For instance, I remember watching Pau
 It’s also fascinating to see the spaces between intersecting technology being explored - primarily, local/offline software and peer-to-peer networking, like iroh. 
 
 My hope is atproto is heading towards <mark>decentralisation for usability</mark> not decentralisation at all costs. Let’s see where it goes!
-
----
-
-_Thanks for reading!_

@@ -20,7 +20,3 @@ A lot of things have come along that helped me on my mission - DevOps/DevSecOps,
 I’m not pro AI. 
 
 I’m pro getting shit done.
-
----
-
-_Thanks for reading!_

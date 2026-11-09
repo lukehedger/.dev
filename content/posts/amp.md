@@ -72,7 +72,3 @@ This all feels handled for me by Amp. The quality of output is amazing and I rar
 And the best bit: Amp changes all the time. The team behind it is constantly shipping killer features and cutting deadwood. Contrast that with Claude Code which has been accumulating features for too long and has several ways of doing the same thing - the onus is on the user to figure out the optimum flow.
 
 Amp works the way I except it to, before I know what that is!
-
----
-
-_Thanks for reading!_

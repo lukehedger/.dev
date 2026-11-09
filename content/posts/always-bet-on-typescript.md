@@ -44,7 +44,3 @@ I’ll leave you with some of the major examples:
 - [promptfoo](https://github.com/promptfoo/promptfoo)
 
 What have I missed?
-
----
-
-_Thanks for reading!_

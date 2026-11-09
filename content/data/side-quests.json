@@ -2,11 +2,11 @@
 	{
 		"title": "boozer",
 		"href": "https://boozer.fly.dev/",
-		"desc": "Installable pub-finding PWA for planning walking pub tours"
+		"desc": "Pubs in London"
 	},
 	{
 		"title": "kit.pics",
-		"href": "https://kit.pics/",
+		"href": "https://kit-pics.lh4.workers.dev/",
 		"desc": "Swipe your way through every Premier League kit"
 	}
 ]

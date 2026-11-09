@@ -90,7 +90,3 @@ What about knowledge sharing and understanding the code?
 Capturing and interrogating business requirements and customer feedback is how you’ll understand what your system should be doing. Operating and observing your system in production is going to be the primary way of understanding its behaviour - what it is actually doing.
 
 Your job is to steer the codebase to ensure these two things match as closely as possible! Sound familiar?
-
----
-
-_Thanks for reading!_
