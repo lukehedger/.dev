@@ -3,7 +3,7 @@ title: Truly reusable CSS
 description: ''
 publishDate: '2017-02-17'
 tags:
-  - software-development
+  - software-engineering
 source: Medium
 originalUrl: 'https://medium.com/@level_out/truly-reusable-css-f9399e66d40a'
 ---

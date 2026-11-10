@@ -3,7 +3,7 @@ title: Angular-Sails
 description: Put the wind back in your Sails app with an Angular frontend
 publishDate: '2014-12-02'
 tags:
-  - software-development
+  - software-engineering
 source: level-out.com
 ---
 

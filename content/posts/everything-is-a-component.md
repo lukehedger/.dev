@@ -3,7 +3,7 @@ title: Everything is a Component
 description: ''
 publishDate: '2018-08-29'
 tags:
-  - software-development
+  - software-engineering
 source: Medium
 originalUrl: 'https://medium.com/@level_out/everything-is-a-component-cf9f469ad981'
 ---
