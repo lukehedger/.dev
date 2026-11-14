@@ -1,5 +1,6 @@
 import { cp, mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
+import { inlineIcons } from "./app/icons.ts";
 
 const ROOT = join(import.meta.dir, "..");
 const APP = join(import.meta.dir, "app");
@@ -29,6 +30,17 @@ async function bundle(entry: string, naming: string, define: Record<string, stri
 		minify: true,
 		naming,
 		define,
+		// The site's renderer reports reading time, which the editor never shows; its Node
+		// stream polyfills would add ~120 KB.
+		plugins: [
+			{
+				name: "stub-reading-time",
+				setup(build) {
+					build.onResolve({ filter: /^reading-time$/ }, () => ({ path: "reading-time", namespace: "stub" }));
+					build.onLoad({ filter: /.*/, namespace: "stub" }, () => ({ contents: "export default () => ({ text: '' });", loader: "js" }));
+				},
+			},
+		],
 	});
 	if (!result.success) {
 		for (const log of result.logs) console.error(log);
@@ -58,7 +70,7 @@ export async function buildEditor(): Promise<void> {
 	const version = hasher.digest("hex").slice(0, 12);
 	await bundle("sw.ts", "sw.js", { VERSION: JSON.stringify(version) });
 
-	await cp(join(APP, "index.html"), join(EDITOR_DIST, "index.html"));
+	await Bun.write(join(EDITOR_DIST, "index.html"), inlineIcons(await Bun.file(join(APP, "index.html")).text()));
 	await Bun.write(join(EDITOR_DIST, "manifest.webmanifest"), JSON.stringify(MANIFEST, null, "\t"));
 	await cp(join(ROOT, "public/fonts/PPMondwest-Regular.woff2"), join(EDITOR_DIST, "fonts/PPMondwest-Regular.woff2"));
 	await cp(join(ROOT, "public/favicon.ico"), join(EDITOR_DIST, "favicon.ico"));

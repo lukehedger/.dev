@@ -2,61 +2,155 @@
 <html lang="en-GB">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
 		<meta name="robots" content="noindex, nofollow" />
 		<meta name="theme-color" content="#0a0a0a" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<title>Editor • lukehedger.dev</title>
 		<!-- Access protects the manifest too, so it must be fetched with credentials. -->
 		<link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
 		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<link rel="apple-touch-icon" href="/icon-192.png" />
 		<script>
-			document.documentElement.setAttribute(
-				"data-theme",
-				localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"),
-			);
+			(() => {
+				let t = null;
+				try {
+					t = localStorage.getItem("theme");
+				} catch {}
+				t = t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+				document.documentElement.setAttribute("data-theme", t);
+				document.querySelector('meta[name="theme-color"]').content = t === "light" ? "#fafafa" : "#0a0a0a";
+			})();
 		</script>
 		<link rel="stylesheet" href="/app.css" />
 		<script type="module" src="/app.js"></script>
 	</head>
-	<body class="ed">
-		<header class="ed-bar">
-			<a class="ed-brand" href="/">lukehedger.dev <span aria-hidden="true">✎</span></a>
-			<span class="ed-status" id="status" role="status" aria-live="polite"></span>
-			<button class="ed-btn" id="signin" type="button" hidden>Sign in</button>
-			<button class="ed-btn" id="sync" type="button">Sync</button>
-			<button class="ed-btn ed-primary" id="new" type="button">New post</button>
+	<body class="ed" data-view="list">
+		<header class="ed-top" id="top">
+			<div class="ed-top-row">
+				<a class="ed-brand" href="#/" id="brand">lukehedger<span>.dev</span></a>
+				<button class="ed-back" id="back" type="button" aria-label="All posts"><i data-icon="back"></i><span>Posts</span></button>
+				<span class="ed-spacer"></span>
+				<button class="ed-status" id="status" type="button" data-state="unknown">
+					<span class="ed-status-dot" aria-hidden="true"></span><span class="ed-status-text" id="status-text">Connecting</span>
+				</button>
+				<button class="ed-icon-btn" id="theme" type="button" aria-label="Switch theme"><i data-icon="moon"></i><i data-icon="sun"></i></button>
+			</div>
+			<div class="ed-format" id="format" role="toolbar" aria-label="Formatting" hidden>
+				<button class="ed-fmt ed-fmt-plus" id="insert-btn" type="button" popovertarget="insert-menu" aria-label="Insert block"><i data-icon="plus"></i></button>
+				<button class="ed-fmt" type="button" data-cmd="bold" aria-label="Bold"><i data-icon="bold"></i></button>
+				<button class="ed-fmt" type="button" data-cmd="italic" aria-label="Italic"><i data-icon="italic"></i></button>
+				<button class="ed-fmt" type="button" data-cmd="strike" aria-label="Strikethrough"><i data-icon="strike"></i></button>
+				<button class="ed-fmt" type="button" data-cmd="code" aria-label="Inline code"><i data-icon="code"></i></button>
+				<button class="ed-fmt" type="button" data-cmd="link" aria-label="Link"><i data-icon="link"></i></button>
+				<label class="ed-fmt" aria-label="Add image"><i data-icon="image"></i><input id="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml" hidden /></label>
+			</div>
 		</header>
-		<div class="ed-main" id="main" data-view="list">
-			<aside class="ed-list" aria-label="Posts">
-				<input class="ed-input" id="filter" type="search" placeholder="Filter posts" aria-label="Filter posts" />
-				<ul id="posts"></ul>
-			</aside>
-			<section class="ed-doc" id="doc" hidden aria-label="Editor">
-				<div class="ed-notice" id="notice" hidden></div>
-				<div class="ed-fields">
-					<label class="ed-field ed-wide">Title <input class="ed-input" id="f-title" autocomplete="off" /></label>
-					<label class="ed-field">Slug <input class="ed-input" id="f-slug" autocomplete="off" spellcheck="false" /></label>
-					<label class="ed-field">Publish date <input class="ed-input" id="f-date" type="date" /></label>
-					<label class="ed-field ed-wide">Description <input class="ed-input" id="f-desc" autocomplete="off" /></label>
-					<label class="ed-field ed-wide">Tags <input class="ed-input" id="f-tags" placeholder="ai, serverless" autocomplete="off" /></label>
-				</div>
-				<div class="ed-toolbar">
-					<button class="ed-btn ed-back" id="back" type="button">← Posts</button>
-					<label class="ed-btn">Add image<input id="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml" hidden /></label>
-					<button class="ed-btn" id="toggle-preview" type="button" aria-pressed="false">Preview</button>
-					<span class="ed-spacer"></span>
-					<button class="ed-btn" id="discard" type="button">Discard changes</button>
-					<button class="ed-btn ed-primary" id="publish" type="button">Publish</button>
-				</div>
-				<div class="ed-panes" id="panes" data-preview="false">
-					<textarea class="ed-body" id="f-body" spellcheck="true" aria-label="Post body (Markdown)"></textarea>
-					<article class="ed-preview prose" id="preview" aria-label="Preview"></article>
-				</div>
+
+		<main class="ed-view ed-list-view" id="list-view">
+			<div class="ed-list-head">
+				<h1 class="ed-h1">Posts</h1>
+				<button class="ed-pill ed-pill-primary" id="new" type="button"><i data-icon="pencil"></i>New post</button>
+			</div>
+			<label class="ed-search">
+				<i data-icon="search"></i>
+				<input id="filter" type="search" placeholder="Search posts" aria-label="Search posts" autocomplete="off" />
+			</label>
+			<section class="ed-group" id="group-wip" hidden>
+				<h2 class="ed-group-title">In progress</h2>
+				<ul class="ed-posts" id="posts-wip"></ul>
 			</section>
-			<section class="ed-empty" id="empty">
-				<p>Pick a post to edit, or start a new one. Drafts stay on this device until you publish.</p>
+			<section class="ed-group" id="group-pub">
+				<h2 class="ed-group-title">Published</h2>
+				<ul class="ed-posts" id="posts-pub"></ul>
 			</section>
+			<p class="ed-empty" id="list-empty" hidden></p>
+		</main>
+
+		<main class="ed-view ed-doc-view" id="doc-view" hidden>
+			<article class="ed-card" id="card">
+				<div class="ed-card-bar">
+					<span class="ed-badge" id="badge">Draft</span>
+					<div class="ed-actions" role="group" aria-label="Post actions">
+						<button class="ed-act" id="preview-btn" type="button" aria-pressed="false" aria-label="Preview"><i data-icon="eye"></i></button>
+						<button class="ed-act" id="tags-btn" type="button" aria-label="Tags"><i data-icon="tag"></i></button>
+						<button class="ed-act ed-act-primary" id="primary" type="button">Publish</button>
+						<button class="ed-act" id="more-btn" type="button" popovertarget="more-menu" aria-label="More"><i data-icon="more"></i></button>
+					</div>
+				</div>
+				<div class="ed-notice" id="notice" role="status" hidden></div>
+				<textarea class="ed-title" id="f-title" rows="1" placeholder="Title" aria-label="Title" autocomplete="off"></textarea>
+				<textarea class="ed-desc" id="f-desc" rows="1" placeholder="Add a description" aria-label="Description" autocomplete="off"></textarea>
+				<div class="ed-chips" id="chips"></div>
+				<div class="ed-content prose" id="rich"></div>
+				<textarea class="ed-source" id="f-body" spellcheck="true" aria-label="Post body (Markdown)" placeholder="Start writing…" hidden></textarea>
+				<div class="ed-content prose ed-preview" id="preview" aria-label="Preview" hidden></div>
+			</article>
+		</main>
+
+		<div class="ed-menu" id="insert-menu" popover>
+			<button class="ed-menu-item" type="button" data-insert="h2"><i data-icon="h2"></i>Heading</button>
+			<button class="ed-menu-item" type="button" data-insert="h3"><i data-icon="h3"></i>Subheading</button>
+			<button class="ed-menu-item" type="button" data-insert="quote"><i data-icon="quote"></i>Quote</button>
+			<button class="ed-menu-item" type="button" data-insert="bullet"><i data-icon="list"></i>Bulleted list</button>
+			<button class="ed-menu-item" type="button" data-insert="ordered"><i data-icon="ordered"></i>Numbered list</button>
+			<button class="ed-menu-item" type="button" data-insert="codeblock"><i data-icon="codeblock"></i>Code block</button>
+			<button class="ed-menu-item" type="button" data-insert="highlight"><i data-icon="highlight"></i>Highlight</button>
+			<button class="ed-menu-item" type="button" data-insert="table"><i data-icon="table"></i>Table</button>
+			<button class="ed-menu-item" type="button" data-insert="divider"><i data-icon="divider"></i>Divider</button>
 		</div>
+
+		<div class="ed-menu" id="more-menu" popover>
+			<label class="ed-menu-item ed-menu-accent" id="m-date"><i data-icon="calendar"></i><span id="m-date-text">Publish date</span><input class="ed-date-overlay" id="f-date" type="date" aria-label="Publish date" /></label>
+			<button class="ed-menu-item" type="button" id="m-slug"><i data-icon="hash"></i><span class="ed-menu-text"><span id="m-slug-text"></span><small id="m-slug-hint"></small></span></button>
+			<a class="ed-menu-item" id="m-view" target="_blank" rel="noopener"><i data-icon="external"></i>View on site</a>
+			<button class="ed-menu-item" type="button" id="m-mode"><i data-icon="markdown"></i><span class="ed-menu-text"><span id="m-mode-text">Edit as Markdown</span><small id="m-mode-hint"></small></span></button>
+			<hr class="ed-menu-rule" />
+			<button class="ed-menu-item" type="button" id="m-sync"><i data-icon="sync"></i>Sync now</button>
+			<button class="ed-menu-item ed-menu-danger" type="button" id="m-discard"><i data-icon="undo"></i><span id="m-discard-text">Discard changes</span></button>
+		</div>
+
+		<dialog class="ed-sheet" id="tag-sheet" aria-label="Tags">
+			<form class="ed-sheet-head" method="dialog" id="tag-form">
+				<input class="ed-field" id="tag-input" placeholder="Find or create a tag" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" />
+				<button class="ed-round ed-round-close" type="button" data-close aria-label="Close"><i data-icon="x"></i></button>
+			</form>
+			<div class="ed-sheet-body">
+				<div class="ed-tag-grid" id="tag-grid"></div>
+			</div>
+		</dialog>
+
+		<dialog class="ed-sheet" id="link-sheet" aria-label="Link">
+			<form class="ed-sheet-head" id="link-form">
+				<input class="ed-field" id="link-input" type="url" inputmode="url" placeholder="Paste or type a link" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" />
+				<button class="ed-round ed-round-ok" type="submit" aria-label="Save link"><i data-icon="check"></i></button>
+			</form>
+			<div class="ed-sheet-body ed-sheet-actions">
+				<button class="ed-pill" type="button" id="link-remove"><i data-icon="unlink"></i>Remove link</button>
+				<button class="ed-pill" type="button" data-close>Cancel</button>
+			</div>
+		</dialog>
+
+		<dialog class="ed-sheet" id="slug-sheet" aria-label="Slug">
+			<form class="ed-sheet-head" id="slug-form">
+				<span class="ed-field ed-field-prefixed"><span>/posts/</span><input id="slug-input" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" /></span>
+				<button class="ed-round ed-round-ok" type="submit" aria-label="Save slug"><i data-icon="check"></i></button>
+			</form>
+			<p class="ed-sheet-body ed-sheet-note" id="slug-note">The post's address. It follows the title until you change it, and is fixed once published.</p>
+		</dialog>
+
+		<dialog class="ed-sheet ed-confirm" id="confirm">
+			<form method="dialog">
+				<h2 class="ed-confirm-title" id="confirm-title"></h2>
+				<p class="ed-confirm-text" id="confirm-text"></p>
+				<div class="ed-sheet-actions">
+					<button class="ed-pill" value="cancel">Cancel</button>
+					<button class="ed-pill ed-pill-danger" value="ok" id="confirm-ok">OK</button>
+				</div>
+			</form>
+		</dialog>
+
+		<div class="ed-toast" id="toast" role="status" aria-live="polite"></div>
 	</body>
 </html>

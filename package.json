@@ -18,6 +18,14 @@
 		"editor:deploy": "wrangler deploy -c editor/wrangler.jsonc"
 	},
 	"devDependencies": {
+		"@tiptap/core": "3.32.2",
+		"@tiptap/extension-image": "3.32.2",
+		"@tiptap/extension-italic": "3.32.2",
+		"@tiptap/extension-table": "3.32.2",
+		"@tiptap/extensions": "3.32.2",
+		"@tiptap/markdown": "3.32.2",
+		"@tiptap/pm": "3.32.2",
+		"@tiptap/starter-kit": "3.32.2",
 		"@types/bun": "latest",
 		"gray-matter": "^4.0.3",
 		"marked": "^15.0.0",
