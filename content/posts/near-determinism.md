@@ -7,7 +7,7 @@ tags: ["ai", "software-engineering"]
 
 When you set an agent off to work on your codebase do you know what to expect?
 
-With a sound enough mental model, you are able to look at a piece of work - a ticket, a prompt, a message - and visualise the implementation. Perhaps not the exact lines you’d write but the edges of it - enough to get you started with something to aim and the details will fall into place around the outline as you work.
+With a sound enough mental model, you are able to look at a piece of work - a ticket, a prompt, a message - and visualise the implementation. Perhaps not the exact lines you’d write but the edges of it - enough to get you started with something to aim for and the details will fall into place inside the outline as you work.
 
 Now, will your agent’s output match this picture?
 
